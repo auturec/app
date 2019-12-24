@@ -1,0 +1,9 @@
+@import 'assets/scss/theme.scss';
+
+.loader {
+  &__spinner {
+    background-color: $app-theme-color;
+    height: 100vh;
+    width: 100vw;
+  }
+}
