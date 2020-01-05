@@ -6,10 +6,12 @@ import {
   useLocation
 } from 'react-router-dom';
 
-import Main from 'routes/main';
+import Dashboard from 'routes/dashboard';
+import Profile from 'routes/profile';
+
 import AppLayout from 'layouts/AppLayout';
 
-import { HOME } from 'constants/routes';
+import { HOME, PROFILE } from 'constants/routes';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -21,17 +23,18 @@ const ScrollToTop = () => {
   return null;
 };
 
-const UnauthenticatedApp: React.FC = () => {
+const AuthenticatedApp: React.FC = () => {
   return (
     <Router>
       <AppLayout>
         <ScrollToTop />
         <Switch>
-          <Route exact path={HOME} component={Main} />
+          <Route exact path={HOME} component={Dashboard} />
+          <Route exact path={PROFILE} component={Profile} />
         </Switch>
       </AppLayout>
     </Router>
   );
 };
 
-export default UnauthenticatedApp;
+export default AuthenticatedApp;

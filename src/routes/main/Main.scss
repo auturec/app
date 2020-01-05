@@ -1,7 +1,49 @@
 @import 'assets/scss/theme.scss';
 
-.main {
-  &__text {
-    color: blue;
+.login {
+  &__box {
+    -webkit-box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.75);
+    border-radius: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+
+    &--icon {
+      display: block;
+      margin: auto;
+    }
+
+    &--org-name {
+      text-align: center;
+      font-size: 30px;
+    }
+
+    &--wrapper {
+      margin-top: 50px;
+      margin-left: 30px;
+      margin-right: 30px;
+      margin-bottom: 50px;
+    }
+
+    &--form {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    &--divider {
+      border-top: 1px solid black;
+    }
+
+    &--social {
+      margin-top: 20px;
+    }
+
+    &--google-icon {
+      margin: 5px;
+    }
   }
 }

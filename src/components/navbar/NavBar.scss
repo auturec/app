@@ -1,7 +1,13 @@
 @import 'assets/scss/theme.scss';
 
-.navigationbar {
-  background-color: $app-theme-color;
-  padding-top: 10px;
-  padding-bottom: 10px;
+.bar {
+  box-shadow: 0 8px 6px -10px black;
+
+  &__menu-icon {
+    border: none;
+  }
+
+  &__menu-icon:hover {
+    border: none;
+  }
 }
