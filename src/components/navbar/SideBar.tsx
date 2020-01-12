@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import APP_LOGO from 'assets/images/app.png';
-import { HOME } from 'constants/routes';
+import { PROFILE, HOME } from 'constants/routes';
 import firebase from 'utils/firebase';
 
 import './SideBar.scss';
@@ -11,8 +11,11 @@ interface SideBarProps {
   setIsOpen: (isOpen: boolean) => void;
 }
 const SideBar: React.FC<SideBarProps> = ({ isOpen, setIsOpen }) => {
+  const history = useHistory();
   const logout = () => {
     firebase.auth().signOut();
+    setIsOpen(false);
+    history.push(HOME);
   };
   return (
     <div>
@@ -20,8 +23,11 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, setIsOpen }) => {
         className={isOpen ? 'sidenav sidenav__open' : 'sidenav sidenav__close'}
       >
         <img className="sidenav__icon" src={APP_LOGO} alt="app" />
-        <Link to={HOME} onClick={() => setIsOpen(false)}>
+        <Link to={PROFILE} onClick={() => setIsOpen(false)}>
           Dashboard
+        </Link>
+        <Link to={HOME} onClick={() => setIsOpen(false)}>
+          Activities
         </Link>
         <div className="sidenav__divider" />
         <button
