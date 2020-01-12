@@ -1,6 +1,75 @@
 @import 'assets/scss/theme.scss';
 
-.login {
+.main {
+  &__tab {
+    &--background-one {
+      background: url('../../assets/images/Page1_Background.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    &--background-two {
+      background: url('../../assets/images/Page2_Background.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    &--background-three {
+      background: url('../../assets/images/Page3_Background.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    &--img {
+      display: block;
+      margin: auto;
+    }
+
+    &--title {
+      padding-top: 50px;
+      padding-left: 10px;
+      padding-right: 10px;
+      font-size: 40px;
+      color: green;
+      font-weight: bold;
+    }
+
+    &--subtitle {
+      padding-left: 10px;
+      padding-right: 10px;
+      font-size: 30px;
+    }
+
+    &--pagination {
+      display: flex;
+      justify-content: center;
+    }
+
+    &--circle {
+      background-color: grey;
+      border-radius: 50%;
+      padding: 10px;
+      margin: 5px;
+      margin-top: 50px;
+      border: 0px;
+    }
+
+    &--circle-active {
+      background-color: green;
+      border-radius: 50%;
+      padding: 10px;
+      margin: 5px;
+      margin-top: 50px;
+      border: 0px;
+    }
+
+    &--button {
+      background-color: green;
+      color: white;
+      border-radius: 20px;
+    }
+  }
+
   &__box {
     -webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.75);
@@ -11,25 +80,11 @@
     margin-top: 50px;
     min-height: 500px;
 
-    &--icon {
-      display: block;
-      margin: auto;
-    }
-
-    &--org-name {
-      text-align: center;
-      font-size: 30px;
-    }
-
     &--wrapper {
       margin-top: 50px;
       margin-left: 10px;
       margin-right: 10px;
       margin-bottom: 50px;
     }
-  }
-
-  &__content {
-    margin-top: 100px;
   }
 }
