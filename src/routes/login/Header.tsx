@@ -1,7 +1,7 @@
 import React from 'react';
 import APP_LOGO from 'assets/images/app.png';
 
-import './Main.scss';
+import './Login.scss';
 
 const Header: React.FC = () => {
   return (
