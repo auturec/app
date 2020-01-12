@@ -1,10 +1,13 @@
 import React from 'react';
+
 import './Dashboard.scss';
 
-const Dashboard = () => {
+const Dashboard: React.FC = () => {
   return (
-    <div>
-      <div>This is the dashboard</div>
+    <div className="columns is-centered is-marginless is-paddingless">
+      <div className="column is-four-fifths">
+        <div className="dashboard__spacing">This is the dashboard</div>
+      </div>
     </div>
   );
 };

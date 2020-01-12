@@ -3,7 +3,7 @@ import React from 'react';
 import BounceLoader from 'react-spinners/BounceLoader';
 import { css } from '@emotion/core';
 
-import './Loader.scss';
+import './AppLoader.scss';
 
 const override = css`
   position: absolute;
@@ -12,18 +12,18 @@ const override = css`
   transform: translate(-50%, -50%);
 `;
 
-const Loader: React.FC = () => {
+const AppLoader: React.FC = () => {
   return (
-    <div className="loader__spinner">
+    <div className="app-loader__spinner">
       <BounceLoader
         css={override}
         sizeUnit="px"
         size={150}
-        color="#159130"
+        color="#3e61fa"
         loading
       />
     </div>
   );
 };
 
-export default Loader;
+export default AppLoader;

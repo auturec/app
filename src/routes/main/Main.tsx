@@ -1,11 +1,13 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
+import { HOME } from 'constants/routes';
 import firebase, { auth, googleProvider } from 'utils/firebase';
-import APP_LOGO from 'assets/images/app.png';
-
+import Header from './Header';
 import './Main.scss';
 
 const Main: React.FC = () => {
+  const history = useHistory();
   const { addToast } = useToasts();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -19,10 +21,12 @@ const Main: React.FC = () => {
 
   const handleSuccessfulLogin = () => {
     addToast('Login Successful!', { appearance: 'success', autoDismiss: true });
+    setIsGoogleButtonLoading(false);
   };
 
   const handleUnsuccessfulLogin = () => {
     addToast('Login Unsuccessful!', { appearance: 'error', autoDismiss: true });
+    setIsGoogleButtonLoading(false);
   };
 
   const googleLogin = () => {
@@ -33,6 +37,7 @@ const Main: React.FC = () => {
         const { user } = result;
         if (user !== null) {
           handleSuccessfulLogin();
+          history.push(HOME);
         } else {
           handleUnsuccessfulLogin();
         }
@@ -40,7 +45,6 @@ const Main: React.FC = () => {
       .catch(() => {
         handleUnsuccessfulLogin();
       });
-    setIsGoogleButtonLoading(false);
   };
 
   const emailAndPasswordLogin = () => {
@@ -62,73 +66,70 @@ const Main: React.FC = () => {
     setIsEmailAndPasswordButtonLoading(false);
   };
   return (
-    <div className="columns is-centered">
-      <div className="column is-two-fifths">
+    <div className="columns is-centered is-marginless">
+      <div className="column is-two-thirds">
         <div className="login__box">
           <div className="login__box--wrapper">
-            <div>
-              <img
-                src={APP_LOGO}
-                alt="react"
-                width="100"
-                className="login__box--icon"
-              />
-              <div className="login__box--org-name">Asturec</div>
-            </div>
-
-            <div className="login__box--form">
-              <div className="field">
-                <div className="control">
-                  <input
-                    className="input is-primary"
-                    type="text"
-                    placeholder="Email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                  />
-                </div>
+            <div className="columns">
+              <div className="column">
+                <Header />
               </div>
-              <div className="field">
-                <div className="control">
-                  <input
-                    className="input is-primary"
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                  />
+              <div className="column">
+                <div className="login__box--form">
+                  <div className="field">
+                    <div className="control">
+                      <input
+                        className="input is-primary"
+                        type="text"
+                        placeholder="Email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <div className="field">
+                    <div className="control">
+                      <input
+                        className="input is-primary"
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    className={
+                      isEmailAndPasswordButtonLoading
+                        ? 'is-loading button is-fullwidth login__box--social'
+                        : 'button is-fullwidth login__box--social'
+                    }
+                    onClick={emailAndPasswordLogin}
+                  >
+                    Login
+                  </button>
                 </div>
+                <div className="login__box--divider" />
+                <button
+                  type="button"
+                  className={
+                    isGoogleButtonLoading
+                      ? 'is-loading button is-fullwidth login__box--social'
+                      : 'button is-fullwidth login__box--social'
+                  }
+                  onClick={googleLogin}
+                >
+                  <img
+                    className="login__box--google-icon"
+                    src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+                    alt="google"
+                    width="20"
+                  />
+                  Login With Google
+                </button>
               </div>
-              <button
-                type="button"
-                className={
-                  isEmailAndPasswordButtonLoading
-                    ? 'is-loading button is-fullwidth login__box--social'
-                    : 'button is-fullwidth login__box--social'
-                }
-                onClick={emailAndPasswordLogin}
-              >
-                Login
-              </button>
             </div>
-            <div className="login__box--divider" />
-            <button
-              type="button"
-              className={
-                isGoogleButtonLoading
-                  ? 'is-loading button is-fullwidth login__box--social'
-                  : 'button is-fullwidth login__box--social'
-              }
-              onClick={googleLogin}
-            >
-              <img
-                className="login__box--google-icon"
-                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-                alt="google"
-                width="20"
-              />
-              Login With Google
-            </button>
           </div>
         </div>
       </div>

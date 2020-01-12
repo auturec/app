@@ -25,7 +25,9 @@
     "navigator": true,
     "Headers": true,
     "Request": true,
-    "fetch": true
+    "fetch": true,
+    "File": true,
+    "WebSocket": true,
   },
   "parser": "babel-eslint",
   "settings": {
@@ -35,5 +37,8 @@
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     }
+  },
+  "env": {
+    "jest": true
   }
 }

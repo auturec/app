@@ -1,10 +1,16 @@
 @import 'assets/scss/theme.scss';
 
 .bar {
-  box-shadow: 0 8px 6px -10px black;
+  -webkit-box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.75);
 
   &__menu-icon {
     border: none;
+
+    &--mobile {
+      margin-top: 10px;
+    }
   }
 
   &__menu-icon:hover {

@@ -3,23 +3,30 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  useLocation
+  useLocation,
+  useHistory
 } from 'react-router-dom';
 
 import Dashboard from 'routes/dashboard';
-import Profile from 'routes/profile';
 
 import AppLayout from 'layouts/AppLayout';
 
-import { HOME, PROFILE } from 'constants/routes';
+import { useUser } from 'contexts/UserContext';
+import { HOME } from 'constants/routes';
 
 const ScrollToTop = () => {
+  const history = useHistory();
+  const {
+    user: { uid }
+  } = useUser();
   const { pathname } = useLocation();
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
-  }, [pathname]);
-
+    if (uid === '') {
+      history.push(`${HOME}`);
+    }
+  }, [pathname, history, uid]);
   return null;
 };
 
@@ -30,7 +37,6 @@ const AuthenticatedApp: React.FC = () => {
         <ScrollToTop />
         <Switch>
           <Route exact path={HOME} component={Dashboard} />
-          <Route exact path={PROFILE} component={Profile} />
         </Switch>
       </AppLayout>
     </Router>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Loader from 'components/loader';
+import AppLoader from 'components/appLoader';
 import { useUser } from 'contexts/UserContext';
 
 const UnauthenticatedApp = React.lazy(() => import('./UnauthenticatedApp'));
@@ -9,10 +9,10 @@ const App: React.FC = () => {
   const { user } = useUser();
   const { uid, isVerifying } = user;
   if (isVerifying) {
-    return <Loader />;
+    return <AppLoader />;
   }
   return (
-    <React.Suspense fallback={<Loader />}>
+    <React.Suspense fallback={<AppLoader />}>
       {uid ? <AuthenticatedApp /> : <UnauthenticatedApp />}
     </React.Suspense>
   );

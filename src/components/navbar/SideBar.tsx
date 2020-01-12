@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import APP_LOGO from 'assets/images/app.png';
-import { HOME, PROFILE } from 'constants/routes';
+import { HOME } from 'constants/routes';
 import firebase from 'utils/firebase';
 
 import './SideBar.scss';
@@ -22,9 +22,6 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, setIsOpen }) => {
         <img className="sidenav__icon" src={APP_LOGO} alt="app" />
         <Link to={HOME} onClick={() => setIsOpen(false)}>
           Dashboard
-        </Link>
-        <Link to={PROFILE} onClick={() => setIsOpen(false)}>
-          Profile
         </Link>
         <div className="sidenav__divider" />
         <button

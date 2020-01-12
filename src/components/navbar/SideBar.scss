@@ -7,16 +7,18 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: $app-theme-color;
+  background-color: white;
   overflow-x: hidden;
-  transition: 0.5s;
+  transition: 0.3s;
   padding-top: 10px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 
   &__icon {
-    margin: 8px 8px 8px 32px;
+    margin: 0px 0px 0px 32px;
     width: 60px;
+    height: 60px;
+    display: block;
   }
 
   &__open {
@@ -35,10 +37,11 @@
   &__logout {
     background-color: transparent;
     border-color: transparent;
-    color: white;
+    color: black;
     padding: 8px 8px 8px 32px;
     justify-content: flex-start;
   }
+
   &__logout:hover {
     border-color: transparent;
     color: $app-theme-dark-color;
@@ -47,7 +50,7 @@
 
   a {
     padding: 8px 8px 8px 32px;
-    color: white;
+    color: black;
     display: block;
   }
 
