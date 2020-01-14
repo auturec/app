@@ -7,7 +7,7 @@ const Associate: React.FC = () => {
   return (
     <div className="columns is-centered is-marginless is-paddingless">
       <div className="column is-four-fifths">
-        <div className="is-centered">pLEASE SHOW SOMETHING</div>
+        <div className="is-centered">Associate game page</div>
         <Canvas />
       </div>
     </div>
