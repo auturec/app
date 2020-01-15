@@ -13,7 +13,6 @@ type Coordinate = {
 };
 
 /* global HTMLCanvasElement, MouseEvent */
-/* eslint consistent-return: ["error", { "treatUndefinedAsUnspecified": false }] */
 const Canvas = ({ width, height }: CanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isPainting, setIspainting] = useState(false);
@@ -46,12 +45,12 @@ const Canvas = ({ width, height }: CanvasProps) => {
     newMousePosition: Coordinate
   ) => {
     if (!canvasRef.current) {
-      return;
+      return undefined;
     }
     const canvas: HTMLCanvasElement = canvasRef.current;
     const context = canvas.getContext('2d');
     if (context) {
-      context.strokeStyle = 'red';
+      context.strokeStyle = 'black';
       context.lineJoin = 'round';
       context.lineWidth = 5;
 
@@ -62,6 +61,7 @@ const Canvas = ({ width, height }: CanvasProps) => {
 
       context.stroke();
     }
+    return undefined;
   };
 
   const paint = useCallback(
@@ -83,41 +83,38 @@ const Canvas = ({ width, height }: CanvasProps) => {
 
   useEffect(() => {
     if (!canvasRef.current) {
-      return;
+      return undefined;
     }
     const canvas: HTMLCanvasElement = canvasRef.current;
     canvas.addEventListener('mousedown', startPaint);
-    const removeListner = () => {
+    return () => {
       canvas.removeEventListener('mousedown', startPaint);
     };
-    removeListner();
   }, [startPaint]);
 
   useEffect(() => {
     if (!canvasRef.current) {
-      return;
+      return undefined;
     }
     const canvas: HTMLCanvasElement = canvasRef.current;
     canvas.addEventListener('mousemove', paint);
-    const removeListner = () => {
+    return () => {
       canvas.removeEventListener('mousemove', paint);
     };
-    removeListner();
   }, [paint]);
 
   useEffect(() => {
     if (!canvasRef.current) {
-      return;
+      return undefined;
     }
 
     const canvas: HTMLCanvasElement = canvasRef.current;
     canvas.addEventListener('mouseup', exitPaint);
     canvas.addEventListener('mouseleave', exitPaint);
-    const removeListner = () => {
+    return () => {
       canvas.removeEventListener('mouseup', exitPaint);
       canvas.removeEventListener('mouseleave', exitPaint);
     };
-    removeListner();
   }, [exitPaint]);
 
   return <canvas ref={canvasRef} height={height} width={width} />;
