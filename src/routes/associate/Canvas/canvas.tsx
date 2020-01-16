@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 
+import './canvas.scss';
+
 // referencing https://dev.to/ankursheel/react-component-to-fraw-on-a-page-using-hooks-and-typescript-2ahp
 
 interface CanvasProps {
@@ -26,9 +28,11 @@ const Canvas = ({ width, height }: CanvasProps) => {
       return undefined;
     }
     const canvas: HTMLCanvasElement = canvasRef.current;
+    const x = event.pageX - canvas.offsetLeft;
+    const y = event.pageY - canvas.offsetTop;
     return {
-      x: event.pageX - canvas.offsetLeft,
-      y: event.pageY - canvas.offsetTop
+      x,
+      y
     };
   };
 
@@ -117,7 +121,14 @@ const Canvas = ({ width, height }: CanvasProps) => {
     };
   }, [exitPaint]);
 
-  return <canvas ref={canvasRef} height={height} width={width} />;
+  return (
+    <canvas
+      ref={canvasRef}
+      height={height}
+      width={width}
+      className="myCanvas"
+    />
+  );
 };
 
 Canvas.defaultProps = {
