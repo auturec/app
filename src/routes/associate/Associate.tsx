@@ -1,14 +1,14 @@
 import React from 'react';
-import Canvas from './Canvas/canvas';
+import DragContainer from './DragContainer/DragContainer';
 
 import './Associate.scss';
 
 const Associate: React.FC = () => {
   return (
-    <div className="columns is-centered is-marginless is-paddingless">
-      <div className="column is-four-fifths">
+    <div className="columns associate">
+      <div className="column">
         <div className="is-centered">Associate game page</div>
-        <Canvas />
+        <DragContainer />
       </div>
     </div>
   );
