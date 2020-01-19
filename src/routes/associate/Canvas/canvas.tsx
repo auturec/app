@@ -28,8 +28,9 @@ const Canvas = ({ width, height }: CanvasProps) => {
       return undefined;
     }
     const canvas: HTMLCanvasElement = canvasRef.current;
-    const x = event.pageX - canvas.offsetLeft;
-    const y = event.pageY - canvas.offsetTop;
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
     return {
       x,
       y

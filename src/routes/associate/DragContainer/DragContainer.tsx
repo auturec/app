@@ -6,13 +6,13 @@ import './DragContainer.scss';
 
 const DragContainer = () => {
   return (
-    <Draggable>
+    <Draggable handle="strong">
       <div className="box no-cursor">
         <strong className="cursor">
           <div>Item, Drag Here</div>
         </strong>
-        <div className="box --innner-box">
-          <Canvas height={200} width={200} />
+        <div className="canvas-box">
+          <Canvas height={340} width={380} />
         </div>
       </div>
     </Draggable>
