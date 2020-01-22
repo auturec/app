@@ -4,18 +4,25 @@ import Canvas from '../Canvas/canvas';
 
 import './DragContainer.scss';
 
-const DragContainer = () => {
+interface DragContainerProps {
+  name: string;
+}
+
+const DragContainer = (props: DragContainerProps) => {
+  const { name } = props;
   return (
-    <Draggable handle="strong">
-      <div className="box no-cursor">
-        <strong className="cursor">
-          <div>Item, Drag Here</div>
-        </strong>
-        <div className="canvas-box">
-          <Canvas height={340} width={380} />
+    <div>
+      <Draggable handle="strong" bounds="div">
+        <div className="box no-cursor">
+          <strong className="cursor">
+            <div>{name}</div>
+          </strong>
+          <div className="canvas-box">
+            <Canvas height={340} width={380} />
+          </div>
         </div>
-      </div>
-    </Draggable>
+      </Draggable>
+    </div>
   );
 };
 

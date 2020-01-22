@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import DragContainer from '../DragContainer/DragContainer';
 
 export const Game: React.FC = () => {
   const getRandomFromArray = (array: Array<string>) => {
@@ -20,7 +21,12 @@ export const Game: React.FC = () => {
     });
   }, [globalGameState.state]);
 
-  return <p>{currentGameState.currentState}</p>;
+  return (
+    <div>
+      <DragContainer name={currentGameState.currentState} />
+      <DragContainer name={currentGameState.currentState} />
+    </div>
+  );
 };
 
 export default Game;
