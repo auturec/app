@@ -11,18 +11,19 @@ interface DragContainerProps {
 const DragContainer = (props: DragContainerProps) => {
   const { name } = props;
   return (
-    <div>
-      <Draggable handle="strong" bounds="div">
-        <div className="box no-cursor">
-          <strong className="cursor">
-            <div>{name}</div>
-          </strong>
-          <div className="canvas-box">
-            <Canvas height={340} width={380} />
-          </div>
+    <Draggable
+      handle="strong"
+      bounds={{ top: -20, left: -10, right: 500, bottom: 20 }}
+    >
+      <div className="box no-cursor">
+        <strong className="cursor">
+          <div>{name}</div>
+        </strong>
+        <div className="canvas-box">
+          <Canvas height={340} width={380} />
         </div>
-      </Draggable>
-    </div>
+      </div>
+    </Draggable>
   );
 };
 
