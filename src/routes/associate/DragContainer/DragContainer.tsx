@@ -13,7 +13,7 @@ const DragContainer = (props: DragContainerProps) => {
   return (
     <Draggable
       handle="strong"
-      bounds={{ top: -20, left: -10, right: 500, bottom: 20 }}
+      bounds={{ top: -15, left: -5, right: 600, bottom: 20 }}
     >
       <div className="box no-cursor">
         <strong className="cursor">
