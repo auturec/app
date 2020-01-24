@@ -7,8 +7,7 @@ const Associate: React.FC = () => {
   return (
     <div className="columns associate">
       <div className="column">
-        <div className="is-centered">Associate game page</div>
-        <h5>Test</h5>
+        <div className="is-left">Associate Game Page</div>
         <Game />
       </div>
     </div>

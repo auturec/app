@@ -1,29 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { ResizableBox, ResizeCallbackData } from 'react-resizable';
-import DragContainer from './DragContainer';
 
-type ResizeContainerProps = {
-  name: string;
+import './ResizeContainer.scss';
+
+type ResizeWindowProps = {
+  height: number;
+  width: number;
 };
 
-const ResizeContainer = (props: ResizeContainerProps) => {
-  const [currentSize] = useState({
-    height: 200,
-    width: 200
-  });
-  const { name } = props;
+const DefaultWindowProps: ResizeWindowProps = {
+  height: 200,
+  width: 200
+};
 
+const ResizeContainer = () => {
+  const ref = useRef(null);
+  const [currentSize] = useState(DefaultWindowProps);
   function useEventHandler(
     /* global Element, Event */
     /* eslint no-undef: "error" */
-
     e: React.SyntheticEvent<Element, Event>,
     data: ResizeCallbackData
-  ) {
-    return { height: data.size.height, width: data.size.width };
+  ): ResizeWindowProps {
+    return {
+      height: data.size.height,
+      width: data.size.width
+    };
   }
 
-  // set hooks here to view current height and width
+  // TODO: set hooks here to view current height and width
 
   return (
     <ResizableBox
@@ -34,13 +39,11 @@ const ResizeContainer = (props: ResizeContainerProps) => {
       maxConstraints={[500, 300]}
       lockAspectRatio
       onResizeStop={useEventHandler}
+      ref={ref}
     >
       <p>
         Current height {currentSize.height} {currentSize.width}
       </p>
-      <span>
-        <DragContainer name={name} />
-      </span>
     </ResizableBox>
   );
 };
