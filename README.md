@@ -45,4 +45,4 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 
 ## Attributes
-Images for Associate Games Icons made by [pongsakornRed]("https://www.flaticon.com/authors/pongsakornred") from [flaticon]("https://www.flaticon.com/")
+Images for Associate Games Icons made by [pongsakornRed]("https://www.flaticon.com/authors/pongsakornred"), [mynamepong](https://www.flaticon.com/authors/mynamepong) from [flaticon]("https://www.flaticon.com/")
