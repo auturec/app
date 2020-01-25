@@ -5,11 +5,9 @@ import './Associate.scss';
 
 const Associate: React.FC = () => {
   return (
-    <div className="columns associate">
-      <div className="column">
-        <div className="is-left">Associate Game Page</div>
-        <Game />
-      </div>
+    <div className="associate group">
+      <div>Associate Game Page</div>
+      <Game />
     </div>
   );
 };

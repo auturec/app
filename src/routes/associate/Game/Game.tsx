@@ -4,25 +4,28 @@ import { DndProvider } from 'react-dnd';
 import Backend from 'react-dnd-html5-backend';
 import TouchBackend from 'react-dnd-touch-backend';
 import { useToasts } from 'react-toast-notifications';
+// add image links separately
 import tempImg from '../../../assets/images/associate/scooter.svg';
 
 import Item from './Item';
+import ItemDropContainer from './ItemDropContainer';
 
-type CategoryState = {
+interface CategoryState {
   state: string[];
-};
+}
 
 const DefaultCategories: CategoryState = {
   state: ['Vehicles', 'Food', 'Shapes', 'Color', 'Numbers']
 };
 
 export const Game: React.FC = () => {
+  const { addToast } = useToasts();
+  const [globalGameState] = useState(DefaultCategories);
+
   const getRandomFromArray = (array: Array<string>) => {
     const randomIndex = Math.floor(Math.random() * array.length);
     return array[randomIndex];
   };
-
-  const [globalGameState] = useState(DefaultCategories);
 
   const [currentGameState, setCurrentGameState] = useState({
     currentState: getRandomFromArray(globalGameState.state)
@@ -33,27 +36,47 @@ export const Game: React.FC = () => {
       currentState: getRandomFromArray(globalGameState.state)
     });
   }, [globalGameState.state]);
-  const { addToast } = useToasts();
-  const handleClick = () => {
-    addToast('Correct!', {
+
+  const handleDropped: (name: string) => void = name => {
+    addToast(`Correct to match ${name}!`, {
       appearance: 'success',
       autoDismiss: true
     });
   };
   return (
-    <div>
+    <div className="row">
       <BrowserView>
         <DndProvider backend={Backend}>
-          <button type="button" onClick={handleClick}>
-            <Item name={currentGameState.currentState} image={tempImg} />
-          </button>
+          <div className="column left">
+            <Item
+              name={currentGameState.currentState}
+              image={tempImg}
+              handleDroppedItem={handleDropped}
+            />
+          </div>
+          <div className="column right">
+            <ItemDropContainer
+              name={currentGameState.currentState}
+              image={tempImg}
+            />
+          </div>
         </DndProvider>
       </BrowserView>
       <MobileView>
         <DndProvider backend={TouchBackend}>
-          <button type="button" onClick={handleClick}>
-            <Item name={currentGameState.currentState} image={tempImg} />
-          </button>
+          <div className="column left">
+            <Item
+              name={currentGameState.currentState}
+              image={tempImg}
+              handleDroppedItem={handleDropped}
+            />
+          </div>
+          <div className="column right">
+            <ItemDropContainer
+              name={currentGameState.currentState}
+              image={tempImg}
+            />
+          </div>
         </DndProvider>
       </MobileView>
     </div>
