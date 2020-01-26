@@ -5,7 +5,8 @@ import Backend from 'react-dnd-html5-backend';
 import TouchBackend from 'react-dnd-touch-backend';
 import { useToasts } from 'react-toast-notifications';
 // add image links separately
-import tempImg from '../../../assets/images/associate/scooter.svg';
+import tempImg from '../../../assets/images/associate/vehicles/scooter.svg';
+import GameLogic from './GameLogic';
 
 import Item from './Item';
 import ItemDropContainer from './ItemDropContainer';
@@ -49,6 +50,7 @@ export const Game: React.FC = () => {
         <DndProvider backend={Backend}>
           <div className="left">
             <h5>Items</h5>
+            <GameLogic />
             <Item
               name={currentGameState.currentState}
               image={tempImg}
