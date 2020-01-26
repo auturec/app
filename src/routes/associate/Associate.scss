@@ -1,22 +1,8 @@
 @import 'assets/scss/theme.scss';
 
 .associate {
-  display: flex;
   margin: 15px;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-  flex-basis: 100%;
-  flex: 1;
+  text-align: center;
 }
 
 .left {
@@ -27,15 +13,18 @@
   float: right;
   width: 50%;
 }
+
 img {
   max-width: 100%;
   height: auto;
 }
+
 .group:after {
   content: '';
   display: table;
   clear: both;
 }
+
 @media screen and (max-width: 480px) {
   .left,
   .right {

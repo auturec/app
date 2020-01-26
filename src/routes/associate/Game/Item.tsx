@@ -25,7 +25,7 @@ export const Item: React.FC<ItemProps> = ({ name, handleDroppedItem }) => {
 
   return (
     <div ref={drag} style={{ opacity }}>
-      <span>{name}</span>
+      <p>{name}</p>
     </div>
   );
 };

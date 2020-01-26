@@ -47,14 +47,21 @@ export const Game: React.FC = () => {
     <div className="row">
       <BrowserView>
         <DndProvider backend={Backend}>
-          <div className="column left">
+          <div className="left">
+            <h5>Items</h5>
+            <Item
+              name={currentGameState.currentState}
+              image={tempImg}
+              handleDroppedItem={handleDropped}
+            />
             <Item
               name={currentGameState.currentState}
               image={tempImg}
               handleDroppedItem={handleDropped}
             />
           </div>
-          <div className="column right">
+          <div className="right">
+            <h5>Categories</h5>
             <ItemDropContainer
               name={currentGameState.currentState}
               image={tempImg}
@@ -64,14 +71,16 @@ export const Game: React.FC = () => {
       </BrowserView>
       <MobileView>
         <DndProvider backend={TouchBackend}>
-          <div className="column left">
+          <div className="left">
+            <h5>Items</h5>
             <Item
               name={currentGameState.currentState}
               image={tempImg}
               handleDroppedItem={handleDropped}
             />
           </div>
-          <div className="column right">
+          <div className="right">
+            <h5>Categories</h5>
             <ItemDropContainer
               name={currentGameState.currentState}
               image={tempImg}

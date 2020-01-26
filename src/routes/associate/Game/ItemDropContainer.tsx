@@ -21,7 +21,7 @@ export const ItemDropContainer: React.FC<ItemDropContainerProps> = ({
   const isActive = canDrop && isOver;
   return (
     <div ref={drop} className="is-right">
-      <div> {isActive ? 'Drop here!' : name} </div>
+      <p> {isActive ? 'Drop here!' : name} </p>
     </div>
   );
 };
