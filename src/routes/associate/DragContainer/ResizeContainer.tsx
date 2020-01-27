@@ -3,17 +3,17 @@ import { ResizableBox, ResizeCallbackData } from 'react-resizable';
 
 import './ResizeContainer.scss';
 
-type ResizeWindowProps = {
+interface ResizeWindowProps {
   height: number;
   width: number;
-};
+}
 
 const DefaultWindowProps: ResizeWindowProps = {
   height: 200,
   width: 200
 };
 
-const ResizeContainer = () => {
+const ResizeContainer: React.FC = () => {
   const ref = useRef(null);
   const [currentSize] = useState(DefaultWindowProps);
   function useEventHandler(

@@ -3,7 +3,7 @@ import Game from './Game/Game';
 
 import './Associate.scss';
 
-const Associate: React.FC = () => {
+export const Associate: React.FC = () => {
   return (
     <div className="associate group">
       <div>Associate Game Page</div>

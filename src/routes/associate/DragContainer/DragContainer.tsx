@@ -8,8 +8,7 @@ interface DragContainerProps {
   name: string;
 }
 
-const DragContainer = (props: DragContainerProps) => {
-  const { name } = props;
+const DragContainer: React.FC<DragContainerProps> = ({ name }) => {
   return (
     <Draggable
       handle="strong"
