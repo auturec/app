@@ -7,7 +7,8 @@ interface ItemDropContainerProps {
 }
 
 export const ItemDropContainer: React.FC<ItemDropContainerProps> = ({
-  name
+  name,
+  image
 }) => {
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: name,
@@ -19,9 +20,14 @@ export const ItemDropContainer: React.FC<ItemDropContainerProps> = ({
   });
 
   const isActive = canDrop && isOver;
+
+  const labelArray = image.split('/');
+  const label = labelArray[labelArray.length - 1];
+
   return (
     <div ref={drop} className="is-right">
-      <p> {isActive ? 'Drop here!' : name} </p>
+      <p> {isActive ? label : label} </p>
+      <img src={image} alt={label} height={200} width={200} />
     </div>
   );
 };

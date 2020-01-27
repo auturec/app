@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BrowserView, MobileView } from 'react-device-detect';
 import { DndProvider } from 'react-dnd';
 import Backend from 'react-dnd-html5-backend';
 import TouchBackend from 'react-dnd-touch-backend';
 import { useToasts } from 'react-toast-notifications';
-// add image links separately
-import tempImg from '../../../assets/images/associate/vehicles/scooter.svg';
-import { ImageKeys } from './GameLogic';
 
+import { ImageKeys, GameLogic } from './GameLogic';
 import Item from './Item';
 import ItemDropContainer from './ItemDropContainer';
 
@@ -23,71 +21,52 @@ export const Game: React.FC = () => {
   const { addToast } = useToasts();
   const [globalGameState] = useState(DefaultCategories);
 
-  const getRandomFromArray = (array: Array<string>) => {
-    const randomIndex = Math.floor(Math.random() * array.length);
-    return array[randomIndex];
-  };
-
-  const [currentGameState, setCurrentGameState] = useState({
-    currentState: getRandomFromArray(globalGameState.state)
-  });
-
-  useEffect(() => {
-    setCurrentGameState({
-      currentState: getRandomFromArray(globalGameState.state)
-    });
-  }, [globalGameState.state]);
-
   const handleDropped: (name: string) => void = name => {
     addToast(`Correct to match ${name}!`, {
       appearance: 'success',
       autoDismiss: true
     });
   };
+
+  const getRandomFromArray = (array: Array<string>) => {
+    const randomArray = array.sort(() => 0.5 - Math.random());
+    return randomArray.slice(0, 2);
+  };
+
+  const getImages = (category: string) => {
+    const allImages = GameLogic();
+    const categoryImages = allImages[category];
+    const selectedImages = getRandomFromArray(categoryImages);
+    const itemImg = selectedImages[0];
+    const containerImg = selectedImages[selectedImages.length - 1];
+    return { itemImg, containerImg };
+  };
+
   return (
     <div className="row">
       <BrowserView>
         <DndProvider backend={Backend}>
-          <div className="left">
-            <h5>Items</h5>
-            <Item
-              name={currentGameState.currentState}
-              image={tempImg}
-              handleDroppedItem={handleDropped}
-            />
-            <Item
-              name={currentGameState.currentState}
-              image={tempImg}
-              handleDroppedItem={handleDropped}
-            />
-          </div>
-          <div className="right">
-            <h5>Categories</h5>
-            <ItemDropContainer
-              name={currentGameState.currentState}
-              image={tempImg}
-            />
-          </div>
+          {globalGameState.state.map(val => {
+            const catImg = getImages(val);
+            return (
+              <div>
+                <div className="left">
+                  <Item
+                    name={val}
+                    image={catImg.itemImg}
+                    handleDroppedItem={handleDropped}
+                  />
+                </div>
+                <div className="right">
+                  <ItemDropContainer name={val} image={catImg.containerImg} />
+                </div>
+              </div>
+            );
+          })}
         </DndProvider>
       </BrowserView>
       <MobileView>
-        <DndProvider backend={TouchBackend}>
-          <div className="left">
-            <h5>Items</h5>
-            <Item
-              name={currentGameState.currentState}
-              image={tempImg}
-              handleDroppedItem={handleDropped}
-            />
-          </div>
-          <div className="right">
-            <h5>Categories</h5>
-            <ItemDropContainer
-              name={currentGameState.currentState}
-              image={tempImg}
-            />
-          </div>
-        </DndProvider>
+        <DndProvider backend={TouchBackend} />
       </MobileView>
     </div>
   );
