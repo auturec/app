@@ -5,7 +5,7 @@ import Backend from 'react-dnd-html5-backend';
 import TouchBackend from 'react-dnd-touch-backend';
 import { useToasts } from 'react-toast-notifications';
 
-import { ImageKeys, GameLogic } from './GameLogic';
+import { ImageKeys, GameLogic } from './GameImages';
 import Item from './Item';
 import ItemDropContainer from './ItemDropContainer';
 
@@ -21,11 +21,21 @@ export const Game: React.FC = () => {
   const { addToast } = useToasts();
   const [globalGameState] = useState(DefaultCategories);
 
-  const handleDropped: (name: string) => void = name => {
-    addToast(`Correct to match ${name}!`, {
-      appearance: 'success',
-      autoDismiss: true
-    });
+  const handleDropped: (name: string, result: boolean) => void = (
+    name,
+    result
+  ) => {
+    if (result) {
+      addToast(`Correct to match ${name}!`, {
+        appearance: 'success',
+        autoDismiss: true
+      });
+    } else {
+      addToast(`Wrong Category!`, {
+        appearance: 'error',
+        autoDismiss: true
+      });
+    }
   };
 
   const getRandomFromArray = (array: Array<string>) => {
@@ -49,7 +59,7 @@ export const Game: React.FC = () => {
           {globalGameState.state.map(val => {
             const catImg = getImages(val);
             return (
-              <div>
+              <div key={val}>
                 <div className="left">
                   <Item
                     name={val}

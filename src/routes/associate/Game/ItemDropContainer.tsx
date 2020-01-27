@@ -11,7 +11,7 @@ export const ItemDropContainer: React.FC<ItemDropContainerProps> = ({
   image
 }) => {
   const [{ canDrop, isOver }, drop] = useDrop({
-    accept: name,
+    accept: 'Item',
     drop: () => ({ name }),
     collect: monitor => ({
       isOver: monitor.isOver(),
@@ -22,12 +22,13 @@ export const ItemDropContainer: React.FC<ItemDropContainerProps> = ({
   const isActive = canDrop && isOver;
 
   const labelArray = image.split('/');
-  const label = labelArray[labelArray.length - 1];
+  const labelDots = labelArray[labelArray.length - 1];
+  const label = labelDots.split('.')[0];
 
   return (
     <div ref={drop} className="is-right">
-      <p> {isActive ? label : label} </p>
       <img src={image} alt={label} height={200} width={200} />
+      <p> {isActive ? label : label} </p>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { useDrag, DragSourceMonitor } from 'react-dnd';
 interface ItemProps {
   name: string;
   image: string;
-  handleDroppedItem: (name: string) => void;
+  handleDroppedItem: (name: string, result: boolean) => void;
 }
 
 export const Item: React.FC<ItemProps> = ({
@@ -13,11 +13,12 @@ export const Item: React.FC<ItemProps> = ({
   handleDroppedItem
 }) => {
   const [{ isDragging }, drag] = useDrag({
-    item: { name, type: name },
+    item: { name, type: 'Item' },
     end: (item: { name: string } | undefined, monitor: DragSourceMonitor) => {
       const dropResult = monitor.getDropResult();
       if (item && dropResult) {
-        handleDroppedItem(name);
+        const result: boolean = item.name === dropResult.name;
+        handleDroppedItem(name, result);
       }
     },
     collect: monitor => ({
@@ -25,15 +26,16 @@ export const Item: React.FC<ItemProps> = ({
     })
   });
 
-  const opacity = isDragging ? 0.4 : 1;
+  const opacity: number = isDragging ? 0.4 : 1;
 
-  const labelArray = image.split('/');
-  const label = labelArray[labelArray.length - 1];
+  const labelArray: string[] = image.split('/');
+  const labelDots: string = labelArray[labelArray.length - 1];
+  const label: string = labelDots.split('.')[0];
 
   return (
     <div ref={drag} style={{ opacity }}>
-      <p>{label}</p>
       <img src={image} alt={label} height={200} width={200} />
+      <p>{label}</p>
     </div>
   );
 };
