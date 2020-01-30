@@ -33,7 +33,7 @@ export const Item: React.FC<ItemProps> = ({
   const label: string = labelDots.split('.')[0];
 
   return (
-    <div ref={drag} style={{ opacity }} className="is-left">
+    <div ref={drag} style={{ opacity }}>
       <img src={image} alt={label} height={100} width={100} />
       <p>{label}</p>
     </div>
