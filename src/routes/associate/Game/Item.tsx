@@ -34,7 +34,7 @@ export const Item: React.FC<ItemProps> = ({
 
   return (
     <div ref={drag} style={{ opacity }}>
-      <img src={image} alt={label} height={200} width={200} />
+      <img src={image} alt={label} height={100} width={100} />
       <p>{label}</p>
     </div>
   );

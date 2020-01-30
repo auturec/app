@@ -27,7 +27,7 @@ export const ItemDropContainer: React.FC<ItemDropContainerProps> = ({
 
   return (
     <div ref={drop} className="is-right">
-      <img src={image} alt={label} height={200} width={200} />
+      <img src={image} alt={label} height={100} width={100} />
       <p> {isActive ? label : label} </p>
     </div>
   );
