@@ -6,7 +6,10 @@ import './Associate.scss';
 export const Associate: React.FC = () => {
   return (
     <div className="associate group">
-      <div>Associate Game Page</div>
+      <div>Associate</div>
+      <div>
+        Match the items on the left to the correct associated item on the right!
+      </div>
       <Game />
     </div>
   );
