@@ -106,11 +106,11 @@ export const Game: React.FC = () => {
 
   const DisplayItems: React.FC<GameComponentProp> = ({ store }) => {
     return (
-      <div>
+      <div className="left">
         {store.map(val => {
           return (
             <div key={val.img}>
-              <div className="left">
+              <div>
                 <Item
                   name={val.category}
                   image={val.img}
@@ -126,11 +126,11 @@ export const Game: React.FC = () => {
 
   const DisplayContainer: React.FC<GameComponentProp> = ({ store }) => {
     return (
-      <div>
+      <div className="right">
         {store.map(val => {
           return (
             <div key={val.img}>
-              <div className="right">
+              <div>
                 <ItemDropContainer name={val.category} image={val.img} />
               </div>
             </div>
