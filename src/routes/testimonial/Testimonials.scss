@@ -1,0 +1,44 @@
+@import 'assets/scss/theme.scss';
+
+.testimonials {
+  &__spacing {
+    margin-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  &__header {
+    text-align: center;
+    color: $app-theme-color;
+    font-size: 30px;
+    font-weight: bold;
+  }
+
+  &__wrapper {
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: grey;
+    border-style: solid;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  &__item {
+    &--name {
+      font-size: 20px;
+      color: grey;
+      font-weight: bold;
+    }
+    &--jobTitle {
+      font-size: 18px;
+      color: grey;
+    }
+    &--comment {
+      font-size: 18px;
+      color: $app-theme-color;
+    }
+  }
+}
