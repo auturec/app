@@ -5,20 +5,14 @@ import TabThree from './TabThree';
 
 import '../Main.scss';
 
-interface TabsProps {
-  tab: number;
-}
-const Tabs: React.FC<TabsProps> = ({ tab }) => {
-  if (tab === 1) {
-    return <TabOne />;
-  }
-  if (tab === 2) {
-    return <TabTwo />;
-  }
-  if (tab === 3) {
-    return <TabThree />;
-  }
-  return <div />;
+const Tabs: React.FC = () => {
+  return (
+    <div>
+      <TabOne />
+      <TabTwo />
+      <TabThree />
+    </div>
+  );
 };
 
 export default Tabs;
