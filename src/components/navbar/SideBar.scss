@@ -30,7 +30,7 @@
   }
 
   &__divider {
-    border: solid 0.5px $app-theme-dark-color;
+    border: solid 0.5px $app-theme-color;
     margin: 8px 8px 8px 32px;
   }
 
@@ -44,7 +44,7 @@
 
   &__logout:hover {
     border-color: transparent;
-    color: $app-theme-dark-color;
+    color: $app-theme-color;
     background-color: rgba(0, 0, 0, 0.1);
   }
 
@@ -55,7 +55,7 @@
   }
 
   a:hover {
-    color: $app-theme-dark-color;
+    color: $app-theme-color;
     background-color: rgba(0, 0, 0, 0.1);
   }
 
