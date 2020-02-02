@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import APP_LOGO from 'assets/images/app.png';
-import { PROFILE, HOME, TESTIMONIAL } from 'constants/routes';
+import { PROFILE, HOME, TESTIMONIAL, FAQS } from 'constants/routes';
 import firebase from 'utils/firebase';
 
 import './SideBar.scss';
@@ -31,6 +31,9 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, setIsOpen }) => {
         </Link>
         <Link to={TESTIMONIAL} onClick={() => setIsOpen(false)}>
           Testimonial
+        </Link>
+        <Link to={FAQS} onClick={() => setIsOpen(false)}>
+          FAQs
         </Link>
         <div className="sidenav__divider" />
         <button
