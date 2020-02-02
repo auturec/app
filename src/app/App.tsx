@@ -4,7 +4,8 @@ import { useUser } from 'contexts/UserContext';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AppLayout from 'layouts/AppLayout';
 import Main from 'routes/main';
-import { HOME } from 'constants/routes';
+import Testimonial from 'routes/testimonial';
+import { HOME, TESTIMONIAL } from 'constants/routes';
 
 const UnauthenticatedApp = React.lazy(() => import('./UnauthenticatedApp'));
 const AuthenticatedApp = React.lazy(() => import('./AuthenticatedApp'));
@@ -29,6 +30,7 @@ const App: React.FC = () => {
           <ScrollToTop />
           <Switch>
             <Route exact path={HOME} component={Main} />
+            <Route exact path={TESTIMONIAL} component={Testimonial} />
             {uid ? <AuthenticatedApp /> : <UnauthenticatedApp />}
           </Switch>
         </AppLayout>
