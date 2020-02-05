@@ -108,6 +108,9 @@ export const Game: React.FC = () => {
   };
 
   const [displayGame] = useState(setUpGame());
+  const [displayWindow] = useState({
+    window: getRanEleFromArray(displayGame.shuffledContainers)
+  });
 
   const DisplayItems: React.FC<GameComponentProp> = ({ store }) => {
     return (
@@ -132,11 +135,13 @@ export const Game: React.FC = () => {
     );
   };
 
-  const DisplayContainer: React.FC<GameComponentProp> = ({ store }) => {
-    const val = getRanEleFromArray(store);
+  const DisplayContainer: React.FC = () => {
     return (
       <div>
-        <ItemDropContainer name={val.category} image={val.img} />
+        <ItemDropContainer
+          name={displayWindow.window.category}
+          image={displayWindow.window.img}
+        />
       </div>
     );
   };
@@ -145,13 +150,13 @@ export const Game: React.FC = () => {
     <div className="row">
       <BrowserView>
         <DndProvider backend={Backend}>
-          <DisplayContainer store={displayGame.shuffledContainers} />
+          <DisplayContainer />
           <DisplayItems store={displayGame.shuffledItems} />
         </DndProvider>
       </BrowserView>
       <MobileView>
         <DndProvider backend={TouchBackend} />
-        <DisplayContainer store={displayGame.shuffledContainers} />
+        <DisplayContainer />
         <DisplayItems store={displayGame.shuffledItems} />
       </MobileView>
     </div>
