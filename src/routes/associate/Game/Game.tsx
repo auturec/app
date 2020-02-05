@@ -4,6 +4,7 @@ import { DndProvider } from 'react-dnd';
 import Backend from 'react-dnd-html5-backend';
 import TouchBackend from 'react-dnd-touch-backend';
 import { useToasts } from 'react-toast-notifications';
+import { DraggableEventHandler } from 'react-draggable';
 
 import { ImageKeys, GameLogic } from './GameImages';
 import Item from './Item';
@@ -29,23 +30,6 @@ interface GameComponentProp {
 export const Game: React.FC = () => {
   const { addToast } = useToasts();
   const [globalGameState] = useState(DefaultCategories);
-
-  const handleDropped: (name: string, result: boolean) => void = (
-    name,
-    result
-  ) => {
-    if (result) {
-      addToast(`Correct to match ${name}!`, {
-        appearance: 'success',
-        autoDismiss: true
-      });
-    } else {
-      addToast(`Wrong Category!`, {
-        appearance: 'error',
-        autoDismiss: true
-      });
-    }
-  };
 
   const getRandomFromArray = (array: Array<string>) => {
     const randomArray = array.sort(() => 0.5 - Math.random());
@@ -112,6 +96,20 @@ export const Game: React.FC = () => {
     window: getRanEleFromArray(displayGame.shuffledContainers)
   });
 
+  const handleDropped: DraggableEventHandler = (e, data) => {
+    if (displayWindow.window.category === data.node.classList[0]) {
+      addToast(`Correct to match ${displayWindow.window.category}!`, {
+        appearance: 'success',
+        autoDismiss: true
+      });
+    } else {
+      addToast(`Wrong Category!`, {
+        appearance: 'error',
+        autoDismiss: true
+      });
+    }
+  };
+
   const DisplayItems: React.FC<GameComponentProp> = ({ store }) => {
     return (
       <div>
@@ -138,10 +136,7 @@ export const Game: React.FC = () => {
   const DisplayContainer: React.FC = () => {
     return (
       <div>
-        <ItemDropContainer
-          name={displayWindow.window.category}
-          image={displayWindow.window.img}
-        />
+        <ItemDropContainer image={displayWindow.window.img} />
       </div>
     );
   };
