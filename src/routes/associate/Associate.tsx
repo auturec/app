@@ -7,9 +7,7 @@ export const Associate: React.FC = () => {
   return (
     <div className="associate group">
       <div>Associate</div>
-      <div>
-        Match the items on the left to the correct associated item on the right!
-      </div>
+      <div>Choose the right item associated with the big picture!</div>
       <Game />
     </div>
   );

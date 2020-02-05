@@ -52,6 +52,11 @@ export const Game: React.FC = () => {
     return randomArray.slice(0, 2);
   };
 
+  const getRanEleFromArray = (array: GameImgProp[]) => {
+    const ranId = Math.floor(array.length * Math.random());
+    return array[ranId];
+  };
+
   /**
    * Randomize array element order in-place.
    * Using Durstenfeld shuffle algorithm.
@@ -106,10 +111,13 @@ export const Game: React.FC = () => {
 
   const DisplayItems: React.FC<GameComponentProp> = ({ store }) => {
     return (
-      <div className="left">
-        {store.map(val => {
+      <div>
+        {store.map((val, index) => {
           return (
-            <div key={val.img}>
+            <div
+              key={val.img}
+              className={index < store.length / 2 ? 'left' : 'right'}
+            >
               <div>
                 <Item
                   name={val.category}
@@ -125,17 +133,10 @@ export const Game: React.FC = () => {
   };
 
   const DisplayContainer: React.FC<GameComponentProp> = ({ store }) => {
+    const val = getRanEleFromArray(store);
     return (
-      <div className="right">
-        {store.map(val => {
-          return (
-            <div key={val.img}>
-              <div>
-                <ItemDropContainer name={val.category} image={val.img} />
-              </div>
-            </div>
-          );
-        })}
+      <div>
+        <ItemDropContainer name={val.category} image={val.img} />
       </div>
     );
   };
@@ -144,12 +145,14 @@ export const Game: React.FC = () => {
     <div className="row">
       <BrowserView>
         <DndProvider backend={Backend}>
-          <DisplayItems store={displayGame.shuffledItems} />
           <DisplayContainer store={displayGame.shuffledContainers} />
+          <DisplayItems store={displayGame.shuffledItems} />
         </DndProvider>
       </BrowserView>
       <MobileView>
         <DndProvider backend={TouchBackend} />
+        <DisplayContainer store={displayGame.shuffledContainers} />
+        <DisplayItems store={displayGame.shuffledItems} />
       </MobileView>
     </div>
   );

@@ -26,8 +26,8 @@ export const ItemDropContainer: React.FC<ItemDropContainerProps> = ({
   const label = labelDots.split('.')[0];
 
   return (
-    <div ref={drop} className="box">
-      <img src={image} alt={label} height={100} width={100} />
+    <div ref={drop}>
+      <img src={image} alt={label} height={150} width={150} />
       <p> {isActive ? label : label} </p>
     </div>
   );
