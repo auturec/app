@@ -13,7 +13,17 @@
     "import/imports-first": ["error", "absolute-first"],
     "import/newline-after-import": "error",
     "import/prefer-default-export": 0,
-    "semi": "error"
+    "semi": "error",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+   ]
   },
   "globals": {
     "window": true,
@@ -27,7 +37,7 @@
     "Request": true,
     "fetch": true,
     "File": true,
-    "WebSocket": true,
+    "WebSocket": true
   },
   "parser": "babel-eslint",
   "settings": {
