@@ -1,8 +1,10 @@
 import React from 'react';
 
+import './Tiles.scss';
+
 const Tiles: React.FC = () => {
   return (
-    <div>
+    <div className="tiles">
       <p>This is the tiles page</p>
     </div>
   );
