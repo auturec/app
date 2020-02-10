@@ -37,7 +37,7 @@
     "Request": true,
     "fetch": true,
     "File": true,
-    "WebSocket": true,
+    "WebSocket": true
   },
   "parser": "babel-eslint",
   "settings": {

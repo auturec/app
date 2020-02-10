@@ -1,5 +1,17 @@
 import React from 'react';
+import Question from './Question';
 import './Faqs.scss';
+
+const data = [
+  {
+    to: '1',
+    question: 'What is Autism?'
+  },
+  {
+    to: '2',
+    question: 'What causes Autism?'
+  }
+];
 
 const Faqs: React.FC = () => {
   return (
@@ -19,11 +31,15 @@ const Faqs: React.FC = () => {
                 <span className="icon is-small is-left">
                   <i className="fas fa-search" />
                 </span>
-                <span className="icon is-small is-right">
-                  <i className="fas fa-check" />
-                </span>
               </div>
             </div>
+          </div>
+          <div>
+            {data.map(item => (
+              <div key={item.to}>
+                <Question to={item.to} question={item.question} />
+              </div>
+            ))}
           </div>
         </div>
       </div>

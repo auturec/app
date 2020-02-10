@@ -42,3 +42,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Attributes
+
+Images for Associate Games Icons made by [pongsakornRed]("https://www.flaticon.com/authors/pongsakornred"), [mynamepong](https://www.flaticon.com/authors/mynamepong) from [flaticon]("https://www.flaticon.com/")
