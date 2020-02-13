@@ -5,7 +5,7 @@ import './Associate.scss';
 
 export const Associate: React.FC = () => {
   return (
-    <div className="associate group">
+    <div className="associate">
       <div>Associate</div>
       <div>Choose the right item associated with the big picture!</div>
       <Game />
