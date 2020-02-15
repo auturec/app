@@ -1,0 +1,40 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-size: cover;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Noto Serif', serif;
+}
+
+h1 {
+  text-align: center;
+  font-size: 5rem;
+  color: black;
+  letter-spacing: 1px;
+}
+
+p {
+  letter-spacing: 0.5px;
+}
+
+.img-1 {
+  width: 200px;
+}
+
+.img-2 {
+  width: 250px;
+}
+
+.img-3 {
+  width: 300px;
+}
+
+.img-4 {
+  width: 350px;
+}
