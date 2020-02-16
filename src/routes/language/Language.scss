@@ -1,0 +1,22 @@
+@import '../../assets/scss/main.scss';
+
+.language {
+  min-height: 100%;
+  &__header {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  &__games {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    &--buttons {
+      @media screen and (max-width: $tablet) {
+        width: 100%;
+      }
+    }
+  }
+}
