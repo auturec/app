@@ -43,6 +43,12 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-
 ## Attributes
-Images for Associate Games Icons made by [pongsakornRed]("https://www.flaticon.com/authors/pongsakornred"), [mynamepong](https://www.flaticon.com/authors/mynamepong) from [flaticon]("https://www.flaticon.com/")
+
+### Images for Associate Games
+
+Icons made by [pongsakornRed](https://www.flaticon.com/authors/pongsakornred), [mynamepong](https://www.flaticon.com/authors/mynamepong) from [flaticon](https://www.flaticon.com/)
+
+### Images for Language Games
+
+Icons made by [monkik](https://www.flaticon.com/authors/monkik) from [flaticon](https://www.flaticon.com/)
