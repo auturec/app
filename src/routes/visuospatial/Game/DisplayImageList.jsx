@@ -1,23 +1,27 @@
 import React from 'react';
-import { ImageList } from './GameImages';
-import { DisplayImage } from './DisplayImage';
+import DisplayImage from './DisplayImage';
 
 // to change to tsx later. error is binding element has implicit any type react for the paramter ImageList in DisplayImage
 // handles the selection of image
 // also handles the resizing of image
 
-const DisplayImageList = () => {
+const DisplayImageList = ({ imgList }) => {
   // returns 1 random image from the list of images
-  const getRandomFromArray = array => {
-    const randomArray = array.sort(() => 0.5 - Math.random());
-    return randomArray.slice(0, 1);
+  //   const getRandomFromArray = (array) => {
+  //     const randomArray = array.sort(() => 0.5 - Math.random());
+  //     return randomArray.slice(0, 1);
+  //   };
+
+  const getRanEleFromArray = array => {
+    const ranId = Math.floor(array.length * Math.random());
+    return array[ranId];
   };
 
   // get 1 random image from the list of images
   const getImage = arr => {
-    const selectedImageDict = getRandomFromArray(arr); // returns the dict
-    const selectedImage = selectedImageDict[image];
-    return { selectedImageDict };
+    let selectedImageDict = getRanEleFromArray(arr); // returns the dict
+    let selectedImage = selectedImageDict[image];
+    return { selectedImage };
   };
 
   const shuffleArray = original => {
@@ -32,7 +36,7 @@ const DisplayImageList = () => {
   const imageSizes = ['200', '225', '250', '275']; // to resize the images
 
   const shuffledSizes = shuffleArray(imageSizes);
-  const image = getImage(ImageList);
+  let image = getImage(imgList);
 
   const imagesArray = shuffledSizes.map((size, idx) => {
     return <DisplayImage image={image} size={size} />;

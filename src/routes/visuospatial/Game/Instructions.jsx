@@ -1,3 +1,5 @@
+import React from 'react';
+
 // Instructions for the game
 // type InstructionsProps = {
 //   instructions: string;

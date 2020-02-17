@@ -8,7 +8,8 @@ import {
 
 import Dashboard from 'routes/dashboard';
 import Associate from 'routes/associate';
-import { PROFILE, ASSOCIATE } from 'constants/routes';
+import Visuospatial from 'routes/visuospatial';
+import { PROFILE, ASSOCIATE, VISUOSPATIAL } from 'constants/routes';
 
 const RedirectPath = () => {
   const history = useHistory();
@@ -24,6 +25,7 @@ const AuthenticatedApp: React.FC = () => {
       <Switch>
         <Route exact path={PROFILE} component={Dashboard} />
         <Route exact path={ASSOCIATE} component={Associate} />
+        <Route exact path={VISUOSPATIAL} component={Visuospatial} />
         <Route component={RedirectPath} />
       </Switch>
     </Router>

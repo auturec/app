@@ -5,7 +5,7 @@ import React from 'react';
 const DisplayImage = ({ image, size }) => {
   return (
     <div>
-      <img src={image} height={size} width={size} />
+      <img src={image} height={size} width={size} alt="image1" />
     </div>
   );
 };
