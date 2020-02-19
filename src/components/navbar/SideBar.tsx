@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import APP_LOGO from 'assets/images/app.png';
-import { PROFILE, HOME, ASSOCIATE } from 'constants/routes';
+import { PROFILE, HOME, ASSOCIATE, TILES } from 'constants/routes';
 import firebase from 'utils/firebase';
 
 import './SideBar.scss';
@@ -31,6 +31,9 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, setIsOpen }) => {
         </Link>
         <Link to={ASSOCIATE} onClick={() => setIsOpen(false)}>
           Associate
+        </Link>
+        <Link to={TILES} onClick={() => setIsOpen(false)}>
+          Tiles
         </Link>
         <div className="sidenav__divider" />
         <button
