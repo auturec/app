@@ -12,7 +12,7 @@ export const ItemDropContainer: React.FC<ItemDropContainerProps> = ({
   const label = labelDots.split('.')[0];
 
   return (
-    <div>
+    <div className="column is-centered">
       <img src={image} alt={label} height={150} width={150} />
       <p> {label} </p>
     </div>
