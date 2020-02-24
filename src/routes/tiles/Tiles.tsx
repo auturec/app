@@ -6,6 +6,9 @@ import './Tiles.scss';
 const Grey: React.FC = TilesImage.UnchoosenTile;
 const list = TilesImage.TilesImageMap();
 
+// get static state (or rando) -> choose random 4 indexs -> create image place holders -> set to match on click -> show if match
+// requires console buttons to check answer / refresh game
+
 const Tiles: React.FC = () => {
   return (
     <div className="container notification is-warning">
@@ -13,7 +16,7 @@ const Tiles: React.FC = () => {
         <div className="tile is-vertical">
           <div className="tile">
             <div className="tile is-parent is-vertical">
-              <article className="tile is-child notification is-primary">
+              <article className="tile is-child notification is-primary has-text-centered">
                 <p className="title">Welcome to the tiles game</p>
                 <p className="subtitle">
                   Click on the right tiles matching the pattern shown!
