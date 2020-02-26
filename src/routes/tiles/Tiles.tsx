@@ -23,9 +23,9 @@ const Tiles: React.FC = () => {
     ansStack: [-1]
   });
 
-  /* global HTMLButtonElement, MouseEvent */
-  const handleMouseClick = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  /* global HTMLElement, MouseEvent */
+  const handleImageClick = (
+    e: React.MouseEvent<HTMLElement, MouseEvent>,
     data: number
   ) => {
     e.preventDefault();
@@ -35,13 +35,14 @@ const Tiles: React.FC = () => {
       ...randomList,
       ansStack: copy
     });
+    // console.log(randomList.ansStack);
   };
 
   const DisplayRandom: React.FC = () => {
     return (
       <div className="columns is-mobile">
         <figure className="column image is-128by128 is-2 has-text-centered has-text-black">
-          <p> Match accordingly! </p>
+          <p> Match the tiles accordingly! </p>
         </figure>
         {randomList.list.map((val, ind) => {
           const src = gameState.list[val];
@@ -64,11 +65,16 @@ const Tiles: React.FC = () => {
       <div className="columns is-mobile">
         {gameState.list.map((val, ind) => {
           return (
-            <figure className="column image is-128by128" key={val}>
-              <button onClick={e => handleMouseClick(e, ind)} type="button">
+            <div key={val}>
+              <figure className="column image is-128by128 has-text-centered">
                 <img src={val} alt={ind.toString()} />
-              </button>
-            </figure>
+                <button
+                  className="button is-primary is-rounded"
+                  onClick={e => handleImageClick(e, ind)}
+                  type="button"
+                >{`Shape number ${ind}!`}</button>
+              </figure>
+            </div>
           );
         })}
       </div>
