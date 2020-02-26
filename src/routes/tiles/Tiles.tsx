@@ -40,22 +40,24 @@ const Tiles: React.FC = () => {
   const [randomList] = useState({
     display: shuffleArray(gameState.ans),
     ansStack: [-1, -1, -1, -1],
-    currPos: 0
+    currPos: 0,
+    ans: [-1]
   });
 
-  /* global HTMLElement, MouseEvent */
+  /* global HTMLButtonElement, MouseEvent */
   const handleImageClick = (
-    e: React.MouseEvent<HTMLElement, MouseEvent>,
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     data: number
   ) => {
     e.preventDefault();
-    gameState.ans.push(data);
+    randomList.ans.push(data);
+    // console.log(gameState);
+    // console.log(randomList);
   };
 
   const DisplayRandom: React.FC = () => {
     return (
       <div className="columns is-centered is-mobile">
-        <div className="column" />
         {gameState.ans.map((val, ind) => {
           const src = gameState.list[val];
           return (
@@ -64,7 +66,6 @@ const Tiles: React.FC = () => {
             </div>
           );
         })}
-        <div className="column" />
       </div>
     );
   };
@@ -76,15 +77,16 @@ const Tiles: React.FC = () => {
   const ImHeader: React.FC = () => {
     return (
       <div className="columns is-centered is-mobile">
-        {randomList.display.map((val, ind) => {
+        {randomList.display.map(val => {
           return (
             <div className="column" key={val}>
-              <img src={gameState.list[val]} alt={ind.toString()} />
               <button
-                className="button is-primary is-rounded is-clickable"
-                onClick={e => handleImageClick(e, ind)}
+                className="has-background-warning	"
+                onClick={e => handleImageClick(e, val)}
                 type="button"
-              >{`Shape ${ind + 1}`}</button>
+              >
+                <img src={gameState.list[val]} alt={gameState.list[val]} />
+              </button>
             </div>
           );
         })}
