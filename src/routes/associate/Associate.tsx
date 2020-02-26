@@ -1,4 +1,5 @@
 import React from 'react';
+import { ToastProvider } from 'react-toast-notifications';
 import Game from './Game/Game';
 
 import './Associate.scss';
@@ -8,7 +9,9 @@ export const Associate: React.FC = () => {
     <div className="associate">
       <div>Associate</div>
       <div>Choose the right item associated with the big picture!</div>
-      <Game />
+      <ToastProvider>
+        <Game />
+      </ToastProvider>
     </div>
   );
 };
