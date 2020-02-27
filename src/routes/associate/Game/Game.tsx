@@ -135,9 +135,13 @@ export const Game: React.FC = () => {
   };
 
   return (
-    <div className="column is-centered">
-      <DisplayContainer />
-      <DisplayItems store={displayGame.shuffledItems} />
+    <div className="container notification is-primary">
+      <div className="column is-centered has-text-black">
+        <div>Associate</div>
+        <div>Choose the right item associated with the big picture!</div>
+        <DisplayContainer />
+        <DisplayItems store={displayGame.shuffledItems} />
+      </div>
     </div>
   );
 };
