@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ToastProvider, useToasts } from 'react-toast-notifications';
 import TilesImage from './TilesImageMap';
 
 import './Tiles.scss';
@@ -6,6 +7,7 @@ import './Tiles.scss';
 // requires console buttons to check answer / refresh game
 
 const Tiles: React.FC = () => {
+  const { addToast } = useToasts();
   /**
    * Randomize array element order in-place.
    * Using Durstenfeld shuffle algorithm.
@@ -28,12 +30,12 @@ const Tiles: React.FC = () => {
     return randomArray.slice(0, 4);
   };
 
-  const [gameState] = useState({
+  const [gameState, setGameState] = useState({
     list: TilesImage.TilesImageMap(),
     ans: getFourRandomFromArray(TilesImage.TilesImageMap())
   });
 
-  const [randomList] = useState({
+  const [randomList, setDisplay] = useState({
     display: shuffleArray(gameState.ans)
   });
 
@@ -59,8 +61,6 @@ const Tiles: React.FC = () => {
         pos: curr
       });
     }
-    // console.log(data);
-    // console.log(ansState);
   };
 
   const DisplayRandom: React.FC = () => {
@@ -80,10 +80,14 @@ const Tiles: React.FC = () => {
     );
   };
 
-  const Grey: React.FC = () => {
+  interface ImageProps {
+    value: string;
+  }
+
+  const TileImage: React.FC<ImageProps> = ({ value }) => {
     return (
-      <div className="column">
-        <img src={TilesImage.GREY_TILE} alt="grey-tile" />
+      <div>
+        <img src={value} alt="grey-tile" />
       </div>
     );
   };
@@ -92,10 +96,26 @@ const Tiles: React.FC = () => {
   const PlayArea: React.FC = () => {
     return (
       <div className="columns is-centered is-mobile">
-        <Grey />
-        <Grey />
-        <Grey />
-        <Grey />
+        {ansState.list.map((val, index) => {
+          return (
+            <div
+              className="column"
+              key={
+                val === -1
+                  ? `grey${index}`
+                  : gameState.list[val] + index.toString()
+              }
+            >
+              <button className="has-background-link" disabled type="button">
+                {val === -1 ? (
+                  <TileImage value={TilesImage.GREY_TILE} />
+                ) : (
+                  <TileImage value={gameState.list[val]} />
+                )}
+              </button>
+            </div>
+          );
+        })}
       </div>
     );
   };
@@ -133,12 +153,96 @@ const Tiles: React.FC = () => {
     );
   };
 
+  const GameButtons: React.FC = () => {
+    const handleAnswer = (
+      e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+      e.preventDefault();
+      if (ansState.list.every(val => gameState.ans.includes(val))) {
+        addToast(`Nice work matching the patterns!`, {
+          appearance: 'success',
+          autoDismiss: true
+        });
+      } else {
+        addToast(`Please check your answer and try again!`, {
+          appearance: 'error',
+          autoDismiss: true
+        });
+      }
+    };
+
+    const handleReset = (
+      e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+      e.preventDefault();
+      addToast(`Game has been reset!`, {
+        appearance: 'warning',
+        autoDismiss: true
+      });
+      // Reset game
+      setGameState({
+        ...gameState,
+        list: TilesImage.TilesImageMap(),
+        ans: getFourRandomFromArray(TilesImage.TilesImageMap())
+      });
+      // Reset Display
+      setDisplay({
+        ...randomList,
+        display: shuffleArray(gameState.ans)
+      });
+    };
+
+    const handleClearAll = (
+      e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+      e.preventDefault();
+      setAnswer({
+        ...ansState,
+        list: [-1, -1, -1, -1],
+        pos: 0
+      });
+      addToast(`Selections has been cleared`, {
+        appearance: 'warning',
+        autoDismiss: true
+      });
+    };
+
+    return (
+      <div className="buttons has-addons is-centered">
+        <button
+          className="button is-dark has-text-white"
+          onClick={e => handleAnswer(e)}
+          type="button"
+        >
+          Check Answer
+        </button>
+        <button
+          className="button is-info has-text-black"
+          onClick={e => handleReset(e)}
+          type="button"
+        >
+          Reset Game
+        </button>
+        <button
+          className="button is-warning has-text-black"
+          onClick={e => handleClearAll(e)}
+          type="button"
+        >
+          Clear All Selections
+        </button>
+      </div>
+    );
+  };
+
   return (
-    <div className="container notification is-warning">
-      <HeaderTitle />
-      <ImHeader />
-      <DisplayRandom />
-      <PlayArea />
+    <div className="container notification is-primary is-centered">
+      <ToastProvider>
+        <HeaderTitle />
+        <GameButtons />
+        <ImHeader />
+        <DisplayRandom />
+        <PlayArea />
+      </ToastProvider>
     </div>
   );
 };
