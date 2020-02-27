@@ -3,18 +3,9 @@ import TilesImage from './TilesImageMap';
 
 import './Tiles.scss';
 
-// get static state (or rando) -> choose random 4 indexs -> create image place holders -> set to match on click -> show if match
 // requires console buttons to check answer / refresh game
 
 const Tiles: React.FC = () => {
-  const list = TilesImage.TilesImageMap();
-  const getFourRandomFromArray = (array: Array<string>) => {
-    const indexList = array.map((val, index) => index);
-    const randomArray = indexList.sort(() => 0.5 - Math.random());
-    return randomArray.slice(0, 4);
-  };
-  const ans = getFourRandomFromArray(list);
-
   /**
    * Randomize array element order in-place.
    * Using Durstenfeld shuffle algorithm.
@@ -22,26 +13,33 @@ const Tiles: React.FC = () => {
    * from https://stackoverflow.com/users/310500/laurens-holst
    * This works, but apparent it binds on the second call for both ans and random list
    */
-  const shuffleArray: (original: Array<number>) => Array<number> = original => {
-    const array = original;
-    for (let i = array.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+  const shuffleArray: (original: any[]) => any[] = original => {
+    const copy = original.slice();
+    for (let i = copy.length - 1; i > 1; i = -1) {
+      const j = Math.floor(Math.random() * i);
+      [copy[i], copy[j]] = [copy[j], copy[i]];
     }
-    return array;
+    return copy;
+  };
+
+  const getFourRandomFromArray = (array: Array<string>) => {
+    const indexList = array.map((val, index) => index);
+    const randomArray = shuffleArray(indexList);
+    return randomArray.slice(0, 4);
   };
 
   const [gameState] = useState({
-    list,
-    ans
+    list: TilesImage.TilesImageMap(),
+    ans: getFourRandomFromArray(TilesImage.TilesImageMap())
   });
-  const Grey: React.FC = TilesImage.UnchoosenTile;
 
   const [randomList] = useState({
-    display: shuffleArray(gameState.ans),
-    ansStack: [-1, -1, -1, -1],
-    currPos: 0,
-    ans: [-1]
+    display: shuffleArray(gameState.ans)
+  });
+
+  const [ansState, setAnswer] = useState({
+    list: [-1, -1, -1, -1],
+    pos: 0
   });
 
   /* global HTMLButtonElement, MouseEvent */
@@ -50,9 +48,19 @@ const Tiles: React.FC = () => {
     data: number
   ) => {
     e.preventDefault();
-    randomList.ans.push(data);
-    // console.log(gameState);
-    // console.log(randomList);
+    if (ansState.pos < ansState.list.length) {
+      let curr = ansState.pos;
+      const currList = ansState.list.slice();
+      currList[curr] = data;
+      curr += 1;
+      setAnswer({
+        ...ansState,
+        list: currList,
+        pos: curr
+      });
+    }
+    // console.log(data);
+    // console.log(ansState);
   };
 
   const DisplayRandom: React.FC = () => {
@@ -62,7 +70,9 @@ const Tiles: React.FC = () => {
           const src = gameState.list[val];
           return (
             <div className="column" key={val}>
-              <img src={src} alt={ind.toString()} />
+              <button className="has-background-danger" disabled type="button">
+                <img src={src} alt={ind.toString()} />
+              </button>
             </div>
           );
         })}
@@ -70,8 +80,24 @@ const Tiles: React.FC = () => {
     );
   };
 
+  const Grey: React.FC = () => {
+    return (
+      <div className="column">
+        <img src={TilesImage.GREY_TILE} alt="grey-tile" />
+      </div>
+    );
+  };
+
+  // Add onclick to remove just the last tile
   const PlayArea: React.FC = () => {
-    return <div> Play Area! </div>;
+    return (
+      <div className="columns is-centered is-mobile">
+        <Grey />
+        <Grey />
+        <Grey />
+        <Grey />
+      </div>
+    );
   };
 
   const ImHeader: React.FC = () => {
@@ -81,7 +107,7 @@ const Tiles: React.FC = () => {
           return (
             <div className="column" key={val}>
               <button
-                className="has-background-warning	"
+                className="has-background-primary	"
                 onClick={e => handleImageClick(e, val)}
                 type="button"
               >
@@ -99,7 +125,7 @@ const Tiles: React.FC = () => {
       <div className="columns">
         <article className="column has-text-centered has-text-black">
           <p>
-            Welcome to the tiles game, click on the right tiles matching the
+            Welcome to the tiles game, click on the right tiles matching the red
             pattern shown!
           </p>
         </article>
@@ -112,7 +138,6 @@ const Tiles: React.FC = () => {
       <HeaderTitle />
       <ImHeader />
       <DisplayRandom />
-      <Grey />
       <PlayArea />
     </div>
   );
