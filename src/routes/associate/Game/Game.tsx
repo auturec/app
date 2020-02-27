@@ -1,8 +1,4 @@
 import React, { useState } from 'react';
-import { BrowserView, MobileView } from 'react-device-detect';
-import { DndProvider } from 'react-dnd';
-import Backend from 'react-dnd-html5-backend';
-import TouchBackend from 'react-dnd-touch-backend';
 import { useToasts } from 'react-toast-notifications';
 import { DraggableEventHandler } from 'react-draggable';
 
@@ -112,14 +108,11 @@ export const Game: React.FC = () => {
 
   const DisplayItems: React.FC<GameComponentProp> = ({ store }) => {
     return (
-      <div>
-        {store.map((val, index) => {
+      <div className="columns is-centered is-mobile">
+        {store.map(val => {
           return (
-            <div
-              key={val.img}
-              className={index < store.length / 2 ? 'left' : 'right'}
-            >
-              <div>
+            <div key={val.img}>
+              <div className="column">
                 <Item
                   name={val.category}
                   image={val.img}
@@ -142,18 +135,13 @@ export const Game: React.FC = () => {
   };
 
   return (
-    <div className="row">
-      <BrowserView>
-        <DndProvider backend={Backend}>
-          <DisplayContainer />
-          <DisplayItems store={displayGame.shuffledItems} />
-        </DndProvider>
-      </BrowserView>
-      <MobileView>
-        <DndProvider backend={TouchBackend} />
+    <div className="container notification is-primary">
+      <div className="column is-centered has-text-black">
+        <div>Associate</div>
+        <div>Choose the right item associated with the big picture!</div>
         <DisplayContainer />
         <DisplayItems store={displayGame.shuffledItems} />
-      </MobileView>
+      </div>
     </div>
   );
 };
